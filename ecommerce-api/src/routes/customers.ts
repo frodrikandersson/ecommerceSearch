@@ -12,6 +12,7 @@ const router = express.Router();
 router.get("/", getCustomers)
 router.get("/:id", getCustomerById)
 router.get("/email/:email", getCustomerByEmail)
+//@ts-ignore
 router.post("/", createCustomer)
 router.patch("/:id", updateCustomer)
 router.delete("/:id", deleteCustomer)

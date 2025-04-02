@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { db } from "../config/db";
-import { ICustomer } from "../models/ICustomer";
+import { ICustomer,CreateCustomerResponse } from "../models/ICustomer";
 import { logError } from "../utilities/logger";
 import { ResultSetHeader } from "mysql2";
 
@@ -44,7 +44,7 @@ export const getCustomerByEmail = async (req: Request, res: Response) => {
   }
 }
 
-export const createCustomer = async (req: Request, res: Response) => {
+export const createCustomer = async (req: Request, res: Response): Promise<Response<CreateCustomerResponse>> => {
 
   const { firstname, lastname, email, password, phone, street_address, postal_code, city, country }: ICustomer = req.body;
   
@@ -60,17 +60,18 @@ export const createCustomer = async (req: Request, res: Response) => {
     const params = [firstname, lastname, email, password, phone, street_address, postal_code, city, country];
 
     
-    const [result] = await db.query<ResultSetHeader>(sql, params) as [ResultSetHeader, any];
-    const customerId = result.insertId;
-    res.status(201).json({ 
-      message: "✅ Customer created",
-      customer: customerId,
+    const [result] = await db.query<ResultSetHeader>(sql, params);
+    const response: CreateCustomerResponse = {
+      message: "✅ Customer created", 
+      customer: result.insertId,
       email: email,
-    });
+    };
+
+    return res.status(201).json(response);
 
   } catch (error: any) {
     console.error("❌ Database Error:", error); 
-    res.status(500).json({ error: error.message || "Database error!" });
+    return res.status(500).json({ error: error.message || "Database error!" });
   }
 }
 
