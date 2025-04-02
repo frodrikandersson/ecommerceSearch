@@ -1,7 +1,7 @@
 // Import and access enironmental variables
 import dotenv from 'dotenv'
 import mysql from 'mysql2/promise'
-dotenv.config({ path: '.env.local' })
+dotenv.config()
 
 export const db = mysql.createPool({
   host: process.env.DB_HOST,
