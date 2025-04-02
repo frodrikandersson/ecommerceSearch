@@ -7,7 +7,7 @@ export const createStripeHosted = async (req: Request, res: Response) => {
     const { line_items, customer } = req.body; 
 
     if (!customer?.email) {
-        return res.status(400).json({ error: "Customer email is required" });
+        res.status(400).json({ error: "Customer email is required" });
     }
 
     try {
@@ -63,7 +63,7 @@ export const getStripeSession = async (req: Request, res: Response) => {
     const { sessionId } = req.params;
     try {
         if (!sessionId) {
-            return res.status(400).json({ error: "Session ID is required" });
+            res.status(400).json({ error: "Session ID is required" });
         }
 
         const session = await stripe.checkout.sessions.retrieve(sessionId);
