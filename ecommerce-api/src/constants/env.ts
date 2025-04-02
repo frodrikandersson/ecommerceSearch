@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 
-dotenv.config();
+dotenv.config({ path: '.env.local' });
 
 const getEnv = (key: string, defaultValue?: string) => {
   const value = process.env[key] || defaultValue;

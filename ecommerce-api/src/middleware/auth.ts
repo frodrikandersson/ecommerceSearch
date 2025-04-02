@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import { NextFunction, Request, RequestExtended, Response } from 'express';
-dotenv.config();
+dotenv.config({ path: '.env.local' });
 import jwt from 'jsonwebtoken';
 import { IUser } from '../models/IUser';
 import { ACCESS_TOKEN_SECRET } from '../constants/env';

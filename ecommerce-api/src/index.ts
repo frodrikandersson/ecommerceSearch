@@ -5,7 +5,7 @@ import cors from 'cors';
 import { VercelRequest, VercelResponse } from "@vercel/node";
 
 import dotenv from 'dotenv';
-dotenv.config();
+dotenv.config({ path: '.env.local' });
 const app = express();
 
 // Middleware
