@@ -13,7 +13,7 @@ app.use(express.json())
 app.use(cookieParser());
 app.use(cors({
   // origin: "http://localhost:5173",
-  origin: "https://ecommerce-searc-git-f4182c-fredrik-anderssons-projects-ec1ef950.vercel.app/",
+  origin: "*",
   credentials: true,  // ✅ Allows cookies
 }));
 
