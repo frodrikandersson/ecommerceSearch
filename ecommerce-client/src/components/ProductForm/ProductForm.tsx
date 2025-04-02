@@ -20,7 +20,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ existingProduct, onClose, onP
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const {handleUpdateProduct} = useProducts();
+  const {handleUpdateProduct, handleCreateProduct} = useProducts();
 
   useEffect(() => {
     if (existingProduct) {
@@ -45,9 +45,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ existingProduct, onClose, onP
     setError("");
     try {
       if (existingProduct) {
-          await handleUpdateProduct(existingProduct.id, product);
+        await handleUpdateProduct(existingProduct.id, product);
       } else {
-        // Create product logic if existingProduct is false... not sure what to do here
+        await handleCreateProduct(product);
       }
       onProductUpdated();
       onClose();
